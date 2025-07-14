@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project-24: Fake News Classifier Using NLP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom font for a professional look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            color: #334155; /* Darker gray text */
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px; /* Underline width */
+            height: 3px;
+            background-color: #3b82f6; /* Blue underline */
+            border-radius: 9999px; /* Rounded ends for the underline */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 sm:p-10 lg:p-12">
+
+            <header class="text-center mb-12">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4 rounded-md">
+                    Fake News Classifier Using NLP
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-600 mb-6">
+                    Developing a natural language processing model to distinguish between authentic and fabricated news articles.
+                </p>
+                <p class="text-md text-gray-500">By Amith MG</p>
+            </header>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">1. Project Overview</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    The proliferation of fake news has become a significant societal challenge, influencing public opinion and eroding trust in media. This project aims to combat this issue by building a machine learning model, powered by Natural Language Processing (NLP), to classify news articles as "real" or "fake". By analyzing textual patterns, linguistic styles, and content characteristics, the model will learn to identify deceptive content, offering a crucial tool for media literacy and information verification.
+                </p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+                    <li><strong class="text-gray-800">Problem:</strong> The difficulty for humans to consistently and quickly discern fake news from legitimate news.</li>
+                    <li><strong class="text-gray-800">Goal:</i> Develop an accurate NLP-based classification model for fake news detection.</li>
+                    <li><strong class="text-gray-800">Impact:</strong> Help users identify unreliable information, support content moderation efforts on platforms, and promote a more informed public discourse.</li>
+                </ul>
+                <div class="text-center mt-8">
+                    <a href="#" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
+                        <i class="fas fa-play-circle mr-2"></i> View Project Demo (Coming Soon)
+                    </a>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">2. Data & Methodology</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Data Summary</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong class="text-gray-800">Datasets:</strong> Typically uses datasets containing news articles labeled as "fake" or "real". Popular datasets include the <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Fake News Dataset (Kaggle)</span> which combines articles from various sources, or more specific datasets. Each entry usually includes the article title, text content, and a label indicating its veracity.</li>
+                            <li><strong class="text-gray-800">Features:</strong> The raw text of the news articles (title and body). Advanced features can include metadata like author, publication source, and date.</li>
+                            <li><strong class="text-gray-800">Target Variable:</strong> Binary classification (e.g., 0 for Real, 1 for Fake).</li>
+                            <li><strong class="text-gray-800">Preprocessing:</strong>
+                                <ul class="list-circle list-inside ml-4 text-gray-600">
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Text Cleaning:</span> Removing special characters, URLs, HTML tags, punctuation, and converting to lowercase.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Tokenization:</span> Splitting text into individual words.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Stop Word Removal:</span> Filtering out common words that don't carry significant meaning.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Stemming/Lemmatization:</span> Reducing words to their base forms.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Vectorization:</span> Converting text into numerical representations suitable for machine learning models (e.g., Bag-of-Words, TF-IDF, Word Embeddings).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Approach</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li><strong class="text-gray-800">Machine Learning Models:</strong>
+                                <ul class="list-circle list-inside ml-4 text-gray-600">
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Traditional ML:</span> <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Naive Bayes</span> (especially Multinomial Naive Bayes), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Logistic Regression</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Support Vector Machines (SVM)</span>.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Deep Learning:</span> <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Recurrent Neural Networks (RNNs)</span> like LSTMs/GRUs, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Convolutional Neural Networks (CNNs)</span>, or more advanced <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Transformer-based models (e.g., BERT, RoBERTa)</span> which excel in understanding contextual nuances.</li>
+                                </ul>
+                            </li>
+                            <li><strong class="text-gray-800">Training & Evaluation:</strong> Split data into training and test sets. Evaluate models using metrics like accuracy, precision, recall, F1-score, and confusion matrix. Given the sensitive nature of fake news detection, balancing precision and recall is important.</li>
+                            <li><strong class="text-gray-800">Cross-validation:</strong> For robust model performance assessment.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">3. Expected Outcomes & Insights</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+                    <li><strong class="text-gray-800">High Accuracy in Classification:</strong> A model that effectively differentiates between real and fake news.</li>
+                    <li><strong class="text-gray-800">Understanding Deceptive Language:</strong> Insights into linguistic markers and stylistic differences that characterize fake news.</li>
+                    <li><strong class="text-gray-800">Practical Application of NLP:</strong> Demonstrate a solid understanding of text preprocessing, feature engineering, and model training in an NLP context.</li>
+                    <li><strong class="text-gray-800">Contribution to Information Literacy:</strong> A tool that can assist in identifying misinformation, contributing to a more discerning public.</li>
+                </ul>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-inner text-center">
+                    <p class="text-gray-700">This project tackles a highly relevant societal problem using advanced NLP techniques, showcasing expertise in building robust text classification systems.</p>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">4. Tools & Technologies</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <li><strong class="text-gray-800">Language:</strong> Python</li>
+                    <li><strong class="text-gray-800">Key Python Libraries:</strong> <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">NLTK</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">SpaCy</span> (for text preprocessing), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Scikit-learn</span> (for traditional ML models and TF-IDF/CountVectorizer), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">TensorFlow/Keras</span> or <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">PyTorch</span> (for deep learning models), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Hugging Face Transformers</span> (for pre-trained language models like BERT), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Pandas</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Numpy</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Matplotlib/Seaborn</span> (for visualization)</li>
+                    <li><strong class="text-gray-800">Development Environment:</strong> Jupyter Notebooks, Google Colab, VS Code</li>
+                    <li><strong class="text-gray-800">Deployment (Optional):</strong> A simple web interface using <strong class="text-blue-600">Streamlit</strong> or <strong class="text-blue-600">Flask</strong> to allow users to input text and get predictions.</li>
+                </ul>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">5. Conclusion & Future Work</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    The Fake News Classifier project demonstrates a strong command of NLP techniques for text classification, addressing a critical modern challenge with practical machine learning solutions.
+                </p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong class="text-gray-800">Future Work 1:</strong> Integrate with external APIs for real-time news source verification and fact-checking.</li>
+                    <li><strong class="text-gray-800">Future Work 2:</strong> Explore graph neural networks to analyze propagation patterns of fake news on social networks.</li>
+                    <li><strong class="text-gray-800">Future Work 3:</i> Incorporate multimodal analysis (e.g., images and videos) in addition to text for a more comprehensive fake news detection system.</li>
+                    <li><strong class="text-gray-800">Future Work 4:</strong> Develop an explainable AI component to highlight why a particular news article was classified as fake.</li>
+                </ul>
+            </section>
+
+            <section class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6 mx-auto w-fit">Connect with Me</h2>
+                <div class="flex justify-center space-x-6 text-2xl">
+                    <a href="#" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300 ease-in-out" aria-label="Project Repository (Placeholder)">
+                        <i class="fab fa-github rounded-full p-2 bg-gray-100 hover:bg-blue-50 shadow-sm"></i>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300 ease-in-out" aria-label="Live Demo (Placeholder)">
+                        <i class="fas fa-globe rounded-full p-2 bg-gray-100 hover:bg-blue-50 shadow-sm"></i>
+                    </a>
+                    <a href="https://in.linkedin.com/in/amithmg6" target="_blank" class="text-gray-600 hover:text-blue-600 transition duration-300 ease-in-out" aria-label="LinkedIn Profile">
+                        <i class="fab fa-linkedin rounded-full p-2 bg-gray-100 hover:bg-blue-50 shadow-sm"></i>
+                    </a>
+                    <a href="mailto:amithds2017@gmail.com" class="text-gray-600 hover:text-blue-600 transition duration-300 ease-in-out" aria-label="Email Address">
+                        <i class="fas fa-envelope rounded-full p-2 bg-gray-100 hover:bg-blue-50 shadow-sm"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm mt-4">Amith MG | amithds2017@gmail.com</p>
+            </section>
+
+        </div>
+    </div>
+</body>
+</html>
