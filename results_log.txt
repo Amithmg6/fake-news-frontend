@@ -1,0 +1,82 @@
+Machine learning Models training, validation, saving the model
+1. Naive Bayes model
+ -- TF-Idf vectorized --
+accuracy:   0.772
+[[3103    8]
+ [1243 1132]]
+Wrong predictions out of total
+1251 / 5486
+Percentage accuracy:  77.19650018228216
+Saving pickle file
+Model saved successfully to multinomial_nb_tfidf_model.pkl
+Model path:  b'C:\\Users\\amith\\Documents\\fake_news_proj'
+ -- Count vectorized --
+accuracy:   0.903
+[[2977  134]
+ [ 397 1978]]
+Wrong predictions out of total
+531 / 5486
+Percentage accuracy:  90.32081662413415
+Saving pickle file
+Model saved successfully to multinomial_nb_cv_model.pkl
+Model path:  b'C:\\Users\\amith\\Documents\\fake_news_proj'
+2. Random Forest Model
+TF-Idf Vectorized
+Model accuracy on train is:  0.9999218688960075
+Model accuracy on test is:  0.907765220561429
+--------------------------------------------------
+confusion_matrix train is:  [[7249    1]
+ [   0 5549]]
+confusion_matrix test is:  [[3054   57]
+ [ 449 1926]]
+Wrong predictions out of total
+--------------------------------------------------
+506 / 5486
+--------------------------------------------------
+# --- Code to Save the RandomForestClassifier Model using pickle ---
+
+MultinomialNB model saved successfully to multinomial_rf_tfidf_model.pkl
+Model accuracy on train is:  0.9999218688960075
+Model accuracy on test is:  0.9032081662413416
+--------------------------------------------------
+confusion_matrix train is:  [[7249    1]
+ [   0 5549]]
+confusion_matrix test is:  [[3040   71]
+ [ 460 1915]]
+Wrong predictions out of total
+--------------------------------------------------
+531 / 5486
+--------------------------------------------------
+# --- Code to Save the RandomForestClassifier Model using pickle ---
+
+MultinomialNB model saved successfully to multinomial_rf_cv_model.pkl
+K-Nearest Neighbour
+Model accuracy on train is:  0.5173060395343386
+Model accuracy on test is:  0.4852351440029165
+--------------------------------------------------
+confusion_matrix train is:  [[1088 6162]
+ [  16 5533]]
+confusion_matrix test is:  [[ 297 2814]
+ [  10 2365]]
+Wrong predictions out of total
+--------------------------------------------------
+2824 / 5486
+--------------------------------------------------
+# --- Code to Save the KNeighborsClassifier Model using pickle ---
+
+MultinomialNB model saved successfully to multinomial_KN_tfidf_model.pkl
+Model accuracy on train is:  0.7849832018126416
+Model accuracy on test is:  0.7316806416332483
+--------------------------------------------------
+confusion_matrix train is:  [[4679 2571]
+ [ 181 5368]]
+confusion_matrix test is:  [[1768 1343]
+ [ 129 2246]]
+Wrong predictions out of total
+--------------------------------------------------
+1472 / 5486
+--------------------------------------------------
+# --- Code to Save the KNeighborsClassifier Model using pickle ---
+
+MultinomialNB model saved successfully to multinomial_KN_CV_model.pkl
+CODE EXECUTION COMPLETED
