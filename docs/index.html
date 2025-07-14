@@ -51,9 +51,9 @@
                     The proliferation of fake news has become a significant societal challenge, influencing public opinion and eroding trust in media. This project aims to combat this issue by building a machine learning model, powered by Natural Language Processing (NLP), to classify news articles as "real" or "fake". By analyzing textual patterns, linguistic styles, and content characteristics, the model will learn to identify deceptive content, offering a crucial tool for media literacy and information verification.
                 </p>
                 <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
-                    <li><strong class="text-gray-800">Problem:</strong> The difficulty for humans to consistently and quickly discern fake news from legitimate news.</li>
-                    <li><strong class="text-gray-800">Goal:</i> Develop an accurate NLP-based classification model for fake news detection.</li>
-                    <li><strong class="text-gray-800">Impact:</strong> Help users identify unreliable information, support content moderation efforts on platforms, and promote a more informed public discourse.</li>
+                    <li><strong>Problem:</strong> The inherent difficulty for humans to consistently and quickly discern fake news from legitimate news, leading to the rapid spread of misinformation.</li>
+                    <li><strong>Goal:</strong> Develop an accurate and robust NLP-based classification model for automated fake news detection.</li>
+                    <li><strong>Impact:</strong> Help users identify unreliable information, support content moderation efforts on online platforms, and promote a more informed public discourse by flagging potentially deceptive content.</li>
                 </ul>
                 <div class="text-center mt-8">
                     <a href="#" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105">
@@ -68,69 +68,202 @@
                     <div>
                         <h3 class="text-xl font-semibold text-gray-800 mb-3">Data Summary</h3>
                         <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong class="text-gray-800">Datasets:</strong> Typically uses datasets containing news articles labeled as "fake" or "real". Popular datasets include the <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Fake News Dataset (Kaggle)</span> which combines articles from various sources, or more specific datasets. Each entry usually includes the article title, text content, and a label indicating its veracity.</li>
-                            <li><strong class="text-gray-800">Features:</strong> The raw text of the news articles (title and body). Advanced features can include metadata like author, publication source, and date.</li>
-                            <li><strong class="text-gray-800">Target Variable:</strong> Binary classification (e.g., 0 for Real, 1 for Fake).</li>
-                            <li><strong class="text-gray-800">Preprocessing:</strong>
+                            <li><strong>Dataset:</strong> This project utilizes a dataset read from a CSV file (e.g., `train.csv`), which typically contains news articles labeled as "fake" or "real". Popular datasets include the <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Fake News Dataset (Kaggle)</span> which combines articles from various sources, or more specific datasets. Each entry usually includes the article title, text content, and a label indicating its veracity.</li>
+                            <li><strong>Features:</strong> The raw text of the news articles (title and body).</li>
+                            <li><strong>Target Variable:</strong> Binary classification (e.g., 0 for Real, 1 for Fake).</li>
+                            <li><strong>Preprocessing:</strong>
                                 <ul class="list-circle list-inside ml-4 text-gray-600">
-                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Text Cleaning:</span> Removing special characters, URLs, HTML tags, punctuation, and converting to lowercase.</li>
-                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Tokenization:</span> Splitting text into individual words.</li>
-                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Stop Word Removal:</span> Filtering out common words that don't carry significant meaning.</li>
-                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Stemming/Lemmatization:</span> Reducing words to their base forms.</li>
-                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Vectorization:</span> Converting text into numerical representations suitable for machine learning models (e.g., Bag-of-Words, TF-IDF, Word Embeddings).</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Handling Missing Values:</span> Rows with NaN entries are dropped.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Text Cleaning:</span> Removing alphanumeric characters (e.g., `\w*\d\w*`), converting text to lowercase, removing punctuation, newline characters (`\n`), and non-ASCII characters.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Stemming:</span> Utilizing <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Snowball Stemmer</span> from NLTK to reduce words to their root form (e.g., "running" to "run").</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Stop Word Removal:</span> Removing common English stopwords (e.g., "the," "a," "is") to focus on more meaningful terms.</li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Approach</h3>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Technical Approach</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            This project employs a comprehensive NLP pipeline to classify news articles. The key steps include:
+                        </p>
                         <ul class="list-disc list-inside text-gray-700 space-y-2">
-                            <li><strong class="text-gray-800">Machine Learning Models:</strong>
+                            <li><strong>Feature Extraction:</strong>
                                 <ul class="list-circle list-inside ml-4 text-gray-600">
-                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Traditional ML:</span> <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Naive Bayes</span> (especially Multinomial Naive Bayes), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Logistic Regression</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Support Vector Machines (SVM)</span>.</li>
-                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Deep Learning:</span> <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Recurrent Neural Networks (RNNs)</span> like LSTMs/GRUs, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Convolutional Neural Networks (CNNs)</span>, or more advanced <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Transformer-based models (e.g., BERT, RoBERTa)</span> which excel in understanding contextual nuances.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">TF-IDF (Term Frequency-Inverse Document Frequency) Vectorization:</span> Transforms text into numerical feature vectors by weighting words based on their frequency in a document and their rarity across the entire corpus. This model is initialized with `stop_words='english'` and `max_df=0.7`.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Count Vectorization:</span> Converts a collection of text documents to a matrix of token counts, representing the frequency of each word. This model is also initialized with `stop_words='english'`.</li>
                                 </ul>
                             </li>
-                            <li><strong class="text-gray-800">Training & Evaluation:</strong> Split data into training and test sets. Evaluate models using metrics like accuracy, precision, recall, F1-score, and confusion matrix. Given the sensitive nature of fake news detection, balancing precision and recall is important.</li>
-                            <li><strong class="text-gray-800">Cross-validation:</strong> For robust model performance assessment.</li>
+                            <li><strong>Model Training and Evaluation:</strong>
+                                <p class="text-gray-700">The data is split into training and testing sets (70% train, 30% test). The project trains and evaluates three different machine learning classification models on both TF-IDF and Count Vectorized data:</p>
+                                <ul class="list-circle list-inside ml-4 text-gray-600">
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Multinomial Naive Bayes:</span> A probabilistic classifier suitable for text classification.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Random Forest Classifier:</span> An ensemble learning method that builds multiple decision trees and merges their predictions.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">K-Nearest Neighbors (KNN) Classifier:</span> A non-parametric method used for classification and regression.</li>
+                                </ul>
+                                <p class="text-gray-700 mt-2">Model performance is assessed using:</p>
+                                <ul class="list-circle list-inside ml-4 text-gray-600">
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Accuracy Score:</span> The proportion of correctly classified instances.</li>
+                                    <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Confusion Matrix:</span> A table used to describe the performance of a classification model on a set of test data for which the true values are known.</li>
+                                    <li>The number of wrong predictions out of total predictions.</li>
+                                    <li>Percentage accuracy.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Model Persistence:</strong>
+                                <p class="text-gray-700">All trained classification models (Multinomial Naive Bayes, Random Forest, K-Nearest Neighbors) for both TF-IDF and Count Vectorizer are saved as `.pkl` (pickle) files for future deployment and inference, indicating a practical application focus. The script also prints the model's saving path. While not explicitly shown as saved in the provided snippet, for a complete deployment, the trained `TfidfVectorizer` and `CountVectorizer` instances would also need to be saved to ensure consistent text transformation for new input data.</p>
+                            </li>
                         </ul>
+                        <p class="text-gray-700 mt-4">This systematic approach allows for a robust comparison of different NLP techniques and classification algorithms to identify the most effective model for fake news detection.</p>
                     </div>
                 </div>
             </section>
-
+            
             <section class="mb-12">
                 <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">3. Expected Outcomes & Insights</h2>
                 <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
-                    <li><strong class="text-gray-800">High Accuracy in Classification:</strong> A model that effectively differentiates between real and fake news.</li>
-                    <li><strong class="text-gray-800">Understanding Deceptive Language:</strong> Insights into linguistic markers and stylistic differences that characterize fake news.</li>
-                    <li><strong class="text-gray-800">Practical Application of NLP:</strong> Demonstrate a solid understanding of text preprocessing, feature engineering, and model training in an NLP context.</li>
-                    <li><strong class="text-gray-800">Contribution to Information Literacy:</strong> A tool that can assist in identifying misinformation, contributing to a more discerning public.</li>
+                    <li><strong>High Accuracy in Classification:</strong> A model that effectively differentiates between real and fake news.</li>
+                    <li><strong>Understanding Deceptive Language:</strong> Insights into linguistic markers and stylistic differences that characterize fake news.</li>
+                    <li><strong>Practical Application of NLP:</strong> Demonstrate a solid understanding of text preprocessing, feature engineering, and model training in an NLP context.</li>
+                    <li><strong>Contribution to Information Literacy:</strong> A tool that can assist in identifying misinformation, contributing to a more discerning public.</li>
                 </ul>
-                <div class="bg-gray-100 p-6 rounded-lg shadow-inner text-center">
+
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Model Performance Highlights (Test Set)</h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    The table below summarizes the performance of various models and vectorization techniques on the test set. Notably, the Random Forest Classifier with TF-IDF vectorization achieved the highest accuracy at 90.78%, making the fewest wrong predictions. Count Vectorization generally led to higher accuracy for Naive Bayes compared to TF-IDF, while K-Nearest Neighbors showed the lowest performance across both vectorizers.
+                </p>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                <th class="py-3 px-4 border-b border-gray-200">Model</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Vectorizer</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Accuracy</th>
+                                <th class="py-3 px-4 border-b border-gray-200">Wrong Predictions (out of 5486)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b border-gray-200">Multinomial Naive Bayes</td>
+                                <td class="py-3 px-4 border-b border-gray-200">TF-IDF</td>
+                                <td class="py-3 px-4 border-b border-gray-200">77.20%</td>
+                                <td class="py-3 px-4 border-b border-gray-200">1251</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b border-gray-200">Multinomial Naive Bayes</td>
+                                <td class="py-3 px-4 border-b border-gray-200">Count</td>
+                                <td class="py-3 px-4 border-b border-gray-200">90.32%</td>
+                                <td class="py-3 px-4 border-b border-gray-200">531</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b border-gray-200">Random Forest</td>
+                                <td class="py-3 px-4 border-b border-gray-200">TF-IDF</td>
+                                <td class="py-3 px-4 border-b border-gray-200">90.78%</td>
+                                <td class="py-3 px-4 border-b border-gray-200">506</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b border-gray-200">Random Forest</td>
+                                <td class="py-3 px-4 border-b border-gray-200">Count</td>
+                                <td class="py-3 px-4 border-b border-gray-200">90.32%</td>
+                                <td class="py-3 px-4 border-b border-gray-200">531</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b border-gray-200">K-Nearest Neighbors</td>
+                                <td class="py-3 px-4 border-b border-gray-200">TF-IDF</td>
+                                <td class="py-3 px-4 border-b border-gray-200">48.52%</td>
+                                <td class="py-3 px-4 border-b border-gray-200">2824</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b border-gray-200">K-Nearest Neighbors</td>
+                                <td class="py-3 px-4 border-b border-gray-200">Count</td>
+                                <td class="py-3 px-4 border-b border-gray-200">73.17%</td>
+                                <td class="py-3 px-4 border-b border-gray-200">1472</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-gray-100 p-6 rounded-lg shadow-inner text-center mt-6">
                     <p class="text-gray-700">This project tackles a highly relevant societal problem using advanced NLP techniques, showcasing expertise in building robust text classification systems.</p>
                 </div>
             </section>
 
             <section class="mb-12">
                 <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">4. Tools & Technologies</h2>
-                <ul class="list-disc list-inside text-gray-700 space-y-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <li><strong class="text-gray-800">Language:</strong> Python</li>
-                    <li><strong class="text-gray-800">Key Python Libraries:</strong> <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">NLTK</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">SpaCy</span> (for text preprocessing), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Scikit-learn</span> (for traditional ML models and TF-IDF/CountVectorizer), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">TensorFlow/Keras</span> or <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">PyTorch</span> (for deep learning models), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Hugging Face Transformers</span> (for pre-trained language models like BERT), <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Pandas</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Numpy</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">Matplotlib/Seaborn</span> (for visualization)</li>
-                    <li><strong class="text-gray-800">Development Environment:</strong> Jupyter Notebooks, Google Colab, VS Code</li>
-                    <li><strong class="text-gray-800">Deployment (Optional):</strong> A simple web interface using <strong class="text-blue-600">Streamlit</strong> or <strong class="text-blue-600">Flask</strong> to allow users to input text and get predictions.</li>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    This project leverages a robust set of Python tools and libraries, enabling efficient natural language processing, machine learning, and model deployment:
+                </p>
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Programming Language</h4>
+                        <ul class="list-disc list-inside ml-4 text-gray-700">
+                            <li><strong>Python:</strong> The entire project is developed using Python, a versatile and widely adopted language for data science, machine learning, and web development due to its extensive ecosystem and readability.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Core Libraries & Modules</h4>
+                        <ul class="list-disc list-inside ml-4 text-gray-700">
+                            <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">re (Regular Expression operations):</span> Used extensively for text cleaning.</li>
+                            <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">pandas:</span> A fundamental library for data manipulation and analysis.</li>
+                             <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">seaborn:</span> A powerful library for data visualization, used here to plot confusion matrices.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Natural Language Processing (NLP) Libraries</h4>
+                        <ul class="list-disc list-inside ml-4 text-gray-700">
+                            <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">nltk (Natural Language Toolkit):</span> Provides tools for stopword removal and stemming (<span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">SnowballStemmer</span>).</li>
+                             <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">sklearn.feature_extraction.text:</span> Includes <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">TfidfVectorizer</span> and <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">CountVectorizer</span> for transforming text into numerical features.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Machine Learning Libraries (Scikit-learn)</h4>
+                        <ul class="list-disc list-inside ml-4 text-gray-700">
+                            <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">sklearn.model_selection.train_test_split:</span> Essential for dividing the dataset into training and testing sets.</li>
+                             <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">sklearn.naive_bayes.MultinomialNB</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">sklearn.ensemble.RandomForestClassifier</span>, <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">sklearn.neighbors.KNeighborsClassifier:</span> Implements the classification models used.</li>
+                            <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">sklearn.metrics:</span> Provides various metrics for evaluating model performance, including <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">accuracy_score</span> and <span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">confusion_matrix</span>.</li>
+                            <li><span class="font-mono text-sm bg-gray-200 px-1 py-0.5 rounded">pickle:</span> Used for model persistence, allowing trained models to be saved and reused.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h4 class="text-lg font-semibold text-gray-800">Deployment Strategy</h4>
+                         <p class="text-gray-700 leading-relaxed mb-2">A common strategy involves a backend hosted on <strong class="text-blue-600">Render</strong> (using Flask/FastAPI) to serve the model via an API, and a static frontend on <strong class="text-blue-600">GitHub Pages</strong> for user interaction.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">5. Good to Know</h2>
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Further Reading & Seminal Papers</h3>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    The models and techniques used in this project are built upon foundational research in Natural Language Processing and Machine Learning. For those interested in a deeper dive, here are some of the key academic papers that introduced these concepts:
+                </p>
+                <ul class="space-y-4 text-gray-700">
+                    <li>
+                        <strong>Random Forests:</strong> Breiman, L. (2001). <a href="https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf" target="_blank" class="text-blue-600 hover:underline">"Random Forests"</a>. This paper introduced the powerful ensemble method used in this project, known for its high accuracy and robustness.
+                    </li>
+                    <li>
+                        <strong>TF-IDF (Term Frequency-Inverse Document Frequency):</strong> Spärck Jones, K. (1972). <a href="https://www.staff.city.ac.uk/~sbrp622/idfpapers/Robertson_idf_JDoc.pdf" target="_blank" class="text-blue-600 hover:underline">"A statistical interpretation of term specificity and its application in retrieval"</a>. The foundational paper that proposed Inverse Document Frequency, a cornerstone of text feature extraction.
+                    </li>
+                    <li>
+                        <strong>K-Nearest Neighbors (kNN):</strong> Cover, T., & Hart, P. (1967). <a href="https://isl.stanford.edu/~cover/papers/transIT/0021cove.pdf" target="_blank" class="text-blue-600 hover:underline">"Nearest Neighbor Pattern Classification"</a>. This seminal work established the formal properties of the kNN rule.
+                    </li>
+                    <li>
+                        <strong>Multinomial Naive Bayes:</strong> Maron, M. E. (1961). <a href="https://web.stanford.edu/~jurafsky/slp3/4.pdf" target="_blank" class="text-blue-600 hover:underline">"The automatic analysis of content"</a>. An early and influential paper demonstrating the use of Naive Bayes for text categorization.
+                    </li>
+                     <li>
+                        <strong>Bag-of-Words & Stemming:</strong> While not a single paper, the concepts are foundational. The Bag-of-Words model is discussed in Zellig Harris's 1954 paper <a href="https://en.wikipedia.org/wiki/Bag-of-words_model" target="_blank" class="text-blue-600 hover:underline">"Distributional Structure"</a>, and the Porter Stemmer algorithm, crucial for text normalization, was detailed in Martin Porter's 1980 paper <a href="https://www.researchgate.net/publication/33038304_The_Porter_stemming_algorithm_Then_and_now" target="_blank" class="text-blue-600 hover:underline">"An algorithm for suffix stripping"</a>.
+                    </li>
                 </ul>
             </section>
 
             <section class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">5. Conclusion & Future Work</h2>
+                <h2 class="text-3xl font-bold text-gray-800 section-title mb-6">6. Conclusion & Future Work</h2>
                 <p class="text-gray-700 leading-relaxed mb-4">
                     The Fake News Classifier project demonstrates a strong command of NLP techniques for text classification, addressing a critical modern challenge with practical machine learning solutions.
                 </p>
                 <ul class="list-disc list-inside text-gray-700 space-y-2">
-                    <li><strong class="text-gray-800">Future Work 1:</strong> Integrate with external APIs for real-time news source verification and fact-checking.</li>
-                    <li><strong class="text-gray-800">Future Work 2:</strong> Explore graph neural networks to analyze propagation patterns of fake news on social networks.</li>
-                    <li><strong class="text-gray-800">Future Work 3:</i> Incorporate multimodal analysis (e.g., images and videos) in addition to text for a more comprehensive fake news detection system.</li>
-                    <li><strong class="text-gray-800">Future Work 4:</strong> Develop an explainable AI component to highlight why a particular news article was classified as fake.</li>
+                    <li><strong>Future Work 1:</strong> Integrate with external APIs for real-time news source verification and fact-checking.</li>
+                    <li><strong>Future Work 2:</strong> Explore graph neural networks to analyze propagation patterns of fake news on social networks.</li>
+                    <li><strong>Future Work 3:</strong> Incorporate multimodal analysis (e.g., images and videos) in addition to text for a more comprehensive fake news detection system.</li>
+                    <li><strong>Future Work 4:</strong> Develop an explainable AI component to highlight why a particular news article was classified as fake.</li>
                 </ul>
             </section>
 
